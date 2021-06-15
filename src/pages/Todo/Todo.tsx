@@ -7,15 +7,6 @@ const Todo = () => {
   const [todoInput, setTodoInput] = useState("");
   const { isLoading, isError, todos, addTodo } = useTodo();
 
-  // const mutation = useMutation<TodoAddRequest, unknown, TodoAddRequest, unknown>(
-  //   (data) => axios.post(URL.TODOS, data).then((response) => response.data),
-  //   {
-  //     onSuccess: (data) => {
-  //       queryClient.setQueryData(QUERY_KEY.TODOS, todos?.concat(data));
-  //     },
-  //   }
-  // );
-
   const handleAddTodo = (e: React.FormEvent) => {
     e.preventDefault();
     addTodo({ title: todoInput, isDone: false });
@@ -30,24 +21,24 @@ const Todo = () => {
     return <div>에러가 발생했습니다.</div>;
   }
 
-  console.log(todos);
-
   return (
-    <S.Form onSubmit={handleAddTodo}>
-      <S.Title>TODO</S.Title>
-      <S.TodoInput
-        placeholder="내용을 입력해주세요."
-        value={todoInput}
-        onChange={(e) => {
-          setTodoInput(e.target.value);
-        }}
-      />
+    <>
+      <S.Form onSubmit={handleAddTodo}>
+        <S.Title>TODO</S.Title>
+        <S.TodoInput
+          placeholder="내용을 입력해주세요."
+          value={todoInput}
+          onChange={(e) => {
+            setTodoInput(e.target.value);
+          }}
+        />
+      </S.Form>
       <S.TodoList>
         {todos?.map((todoInfo) => (
-          <TodoItem todoInfo={todoInfo} />
+          <TodoItem key={todoInfo.id} todoInfo={todoInfo} />
         ))}
       </S.TodoList>
-    </S.Form>
+    </>
   );
 };
 

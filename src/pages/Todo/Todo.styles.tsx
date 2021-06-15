@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { COLOR } from "../../constants/styleConstant";
 
-export const Form = styled.form``;
+export const Form = styled.form`
+  margin-bottom: 3rem;
+`;
 
 export const Title = styled.div`
   text-align: center;
@@ -16,7 +18,7 @@ export const TodoInput = styled.input`
   background-color: transparent;
   border: none;
   color: ${COLOR.WHITE};
-  border-bottom: 1px solid ${COLOR.WHITE};
+  border-bottom: 3px solid ${COLOR.WHITE};
   height: 4rem;
   font-size: 2rem;
   padding: 0.5rem 1rem;
