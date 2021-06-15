@@ -3,6 +3,10 @@ import { normalize } from "styled-normalize";
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+  * {
+    box-sizing: border-box;
+  }
   html,
   body,
   ul {
@@ -12,10 +16,13 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: 'Noto Sans KR', sans-serif;
   }
-
+  
   body {
     display: flex;
     justify-content: center;
+    background-image: url('assets/background.jpg');
+    background-size: cover;
+    background-position: center;
   }
    
   svg {

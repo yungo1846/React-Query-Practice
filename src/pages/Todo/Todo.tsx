@@ -1,18 +1,26 @@
-import axios from "axios";
-import { useQuery } from "react-query";
+import { useState } from "react";
 import TodoItem from "../../components/TodoItem";
-import { URL } from "../../constants/URL";
-import { TodoInfo } from "../../types/todo";
+import useTodo from "../../hooks/useTodo";
 import * as S from "./Todo.styles";
 
 const Todo = () => {
-  const {
-    isLoading,
-    isError,
-    data: todos,
-  } = useQuery<TodoInfo[], Error>("todos", () =>
-    axios.get(URL.TODOS).then((response) => response.data)
-  );
+  const [todoInput, setTodoInput] = useState("");
+  const { isLoading, isError, todos, addTodo } = useTodo();
+
+  // const mutation = useMutation<TodoAddRequest, unknown, TodoAddRequest, unknown>(
+  //   (data) => axios.post(URL.TODOS, data).then((response) => response.data),
+  //   {
+  //     onSuccess: (data) => {
+  //       queryClient.setQueryData(QUERY_KEY.TODOS, todos?.concat(data));
+  //     },
+  //   }
+  // );
+
+  const handleAddTodo = (e: React.FormEvent) => {
+    e.preventDefault();
+    addTodo({ title: todoInput, isDone: false });
+    setTodoInput("");
+  };
 
   if (isLoading) {
     return <div>로딩중...</div>;
@@ -25,14 +33,20 @@ const Todo = () => {
   console.log(todos);
 
   return (
-    <S.Form>
-      <S.Title></S.Title>
-      <S.TodoInput placeholder="내용을 입력해주세요." />
-      <S.TodoContainer>
+    <S.Form onSubmit={handleAddTodo}>
+      <S.Title>TODO</S.Title>
+      <S.TodoInput
+        placeholder="내용을 입력해주세요."
+        value={todoInput}
+        onChange={(e) => {
+          setTodoInput(e.target.value);
+        }}
+      />
+      <S.TodoList>
         {todos?.map((todoInfo) => (
           <TodoItem todoInfo={todoInfo} />
         ))}
-      </S.TodoContainer>
+      </S.TodoList>
     </S.Form>
   );
 };

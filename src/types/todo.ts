@@ -3,3 +3,8 @@ export interface TodoInfo {
   title: string;
   isDone: boolean;
 }
+
+export interface TodoAddRequest {
+  title: TodoInfo["title"];
+  isDone: TodoInfo["isDone"];
+}
