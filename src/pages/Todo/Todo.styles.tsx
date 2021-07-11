@@ -36,3 +36,13 @@ export const TodoList = styled.ul`
   width: 100%;
   list-style: disc;
 `;
+
+export const FetchMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-weight: bold;
+  font-size: 2rem;
+  color: #303030;
+`;

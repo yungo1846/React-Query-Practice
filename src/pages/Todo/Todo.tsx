@@ -14,11 +14,11 @@ const Todo = () => {
   };
 
   if (isLoading) {
-    return <div>로딩중...</div>;
+    return <S.FetchMessage>로딩중...</S.FetchMessage>;
   }
 
   if (isError) {
-    return <div>에러가 발생했습니다.</div>;
+    return <S.FetchMessage>에러가 발생했습니다.</S.FetchMessage>;
   }
 
   return (
